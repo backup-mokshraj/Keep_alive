@@ -21,6 +21,5 @@ jobs:
               run : |
                 git clone https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git
                 git pull
-                git add test.txt
                 git commit --allow-empty -m "server-start"
                 git push origin master
