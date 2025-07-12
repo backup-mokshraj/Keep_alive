@@ -19,7 +19,6 @@ jobs:
 
             - name: Restart server
               run : |
-                sleep 300
                 git clone https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git
                 cd Mine_server
                 git commit --allow-empty -m "server-start"
