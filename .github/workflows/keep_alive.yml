@@ -19,7 +19,21 @@ jobs:
 
             - name: Restart server
               run : |
+                mkdir -p backup
+                cd backup
                 git clone https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git
                 cd Mine_server
                 git commit --allow-empty -m "server-start"
                 git push origin master
+                git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+                git status
+                git rm --ignore-unmatch /home/runner/work/Mine_server/Mine_server/master.zip
+                git status
+                git rm --ignore-unmatch /home/runner/work/Mine_server/Mine_server/localtonet-linux-x64.zip
+                git status
+                git add .
+                git status
+                git commit -m "server save"
+                git status
+                git push origin master
+                git status
