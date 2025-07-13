@@ -25,8 +25,12 @@ jobs:
                 cd Mine_server
                 git commit --allow-empty -m "server-start"
                 git push origin master
+                
+            - name: backup server
+              run : |
                 git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
                 git status
+                git pull
                 git add .
                 git status
                 git commit --allow-empty -m "server save"
