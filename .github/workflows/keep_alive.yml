@@ -25,7 +25,7 @@ jobs:
                 cd Mine_server
                 git commit --allow-empty -m "server-start"
                 git push origin master
-                git remote set-url origin https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+                git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
                 git status
                 git add .
                 git status
