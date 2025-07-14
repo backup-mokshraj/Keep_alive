@@ -21,8 +21,14 @@ jobs:
               run : |
                 mkdir -p backup
                 cd backup
-                git clone https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git
                 cd Mine_server
+                git remote set-url origin https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git
+                # Join the split zip
+                cat git_backup.zip.part_* > git_backup.zip
+                # Unzip back into .git folder
+                unzip git_backup.zip
+                # Clean up zip files
+                rm -f git_backup.zip git_backup.zip.part_*
                 git pull
                 git commit --allow-empty -m "server-start"
                 git push origin master
