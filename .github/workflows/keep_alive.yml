@@ -31,7 +31,7 @@ jobs:
               run : |
                 cd backup
                 cd Mine_server
-                mv .git .git_hidden
+                rm -f .git
                 git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
                 git status
                 git pull
