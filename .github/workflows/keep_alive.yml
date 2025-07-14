@@ -21,8 +21,8 @@ jobs:
               run : |
                 mkdir -p backup
                 cd backup
+                git clone https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git .git
                 cd Mine_server
-                git clone --bare https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git .git
                 git pull
                 git commit --allow-empty -m "server-start"
                 git push origin master
@@ -31,7 +31,12 @@ jobs:
               run : |
                 cd backup
                 cd Mine_server
-                rm -rf .git
+                # Compress the .git folder
+                zip -r git_backup.zip .git
+                # Split into 90MB chunks
+                split -b 90M git_backup.zip git_backup.zip.part_
+                # Remove original zip and .git to save space
+                rm -rf git_backup.zip .git
                 git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git
                 git status
                 git pull
