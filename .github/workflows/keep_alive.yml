@@ -21,7 +21,7 @@ jobs:
               run : |
                 mkdir -p backup
                 cd backup
-                git clone https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git .git
+                git clone https://x-access-token:${{ secrets.TARGET_REPO_PAT }}@github.com/mokshraj/Mine_server.git
                 cd Mine_server
                 git pull
                 git commit --allow-empty -m "server-start"
